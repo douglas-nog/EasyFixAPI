@@ -1,5 +1,6 @@
 package br.com.fiap.easyfix.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -34,7 +35,8 @@ public class SolicitacaoDeServico {
 
     public SolicitacaoDeServico(SolicitacaoDeServico solicitacaoDeServico) {
         this.id = solicitacaoDeServico.id;
-        this.tipoServico = solicitacaoDeServico.tipoServico;
+        this.tipoServico = new TipoServico(solicitacaoDeServico.tipoServico);
         this.descricaoServico = solicitacaoDeServico.descricaoServico;
     }
+
 }

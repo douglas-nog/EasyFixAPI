@@ -1,6 +1,7 @@
 package br.com.fiap.easyfix.controller;
 
 
+import br.com.fiap.easyfix.model.DadosListagemSolicitacaoDeServico;
 import br.com.fiap.easyfix.model.SolicitacaoDeServico;
 import br.com.fiap.easyfix.repository.SolicitacaoDeServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class SolicitacaoDeServicoController {
     }
 
     @GetMapping
-    public  ResponseEntity<Page<SolicitacaoDeServico>> buscarSolicitacoesDeServico(Pageable pageable) {
-        var page = solicitacaodeServicoRepository.findAll(pageable).map(SolicitacaoDeServico::new);
+    public  ResponseEntity<Page<DadosListagemSolicitacaoDeServico>> buscarSolicitacoesDeServico(Pageable pageable) {
+        var page = solicitacaodeServicoRepository.findAll(pageable).map(DadosListagemSolicitacaoDeServico::new);
         return ResponseEntity.ok(page);
     }
 
