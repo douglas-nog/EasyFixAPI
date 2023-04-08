@@ -4,12 +4,11 @@ package br.com.fiap.easyfix.controller;
 import br.com.fiap.easyfix.model.SolicitacaoDeServico;
 import br.com.fiap.easyfix.repository.SolicitacaoDeServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -25,5 +24,11 @@ public class SolicitacaoDeServicoController {
         solicitacaodeServicoRepository.save(new SolicitacaoDeServico(solicitacaoDeServico));
         var uri = uriComponentsBuilder.path("solicitacao/{id}").buildAndExpand(solicitacaoDeServico.getId()).toUri();
         return ResponseEntity.created(uri).body(solicitacaoDeServico);
+    }
+
+    @GetMapping
+    public  ResponseEntity<Page<SolicitacaoDeServico>> listarSolicitacoesDeServico(Pageable pageable) {
+        var page = solicitacaodeServicoRepository.findAll(pageable).map(SolicitacaoDeServico::new);
+        return ResponseEntity.ok(page);
     }
 }
