@@ -32,5 +32,19 @@ public class TipoServicoController {
         return ResponseEntity.ok(page);
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity buscarTipoDeServiçoPorId(@PathVariable Long id) {
+        var resultSearchOne = tipoServicoRepository.findById(id).get();
+        return ResponseEntity.ok(resultSearchOne);
+    }
+
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity atualizarTipoServico(@RequestBody @Valid TipoServico tipoServico, @PathVariable Long id) {
+        tipoServico.setId(id);
+        tipoServicoRepository.save(tipoServico);
+        return ResponseEntity.ok(tipoServico);
+    }
+
 
 }
