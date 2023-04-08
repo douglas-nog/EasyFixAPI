@@ -1,7 +1,10 @@
 package br.com.fiap.easyfix.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity(name = "tipoServico")
 @Table(name = "tb_tipo_servico")
@@ -19,6 +22,11 @@ public class TipoServico {
 
     @Column(name = "ds_tipo_servico")
     private String nomeServico;
+
+    @OneToMany
+    @JoinColumn(name = "id_tipo_servico")
+    @JsonIgnore
+    private List<TipoServico> tipoServico;
 
     public TipoServico(TipoServico tipoServico) {
         this.id = tipoServico.id;
