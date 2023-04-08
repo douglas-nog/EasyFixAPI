@@ -27,8 +27,29 @@ public class SolicitacaoDeServicoController {
     }
 
     @GetMapping
-    public  ResponseEntity<Page<SolicitacaoDeServico>> listarSolicitacoesDeServico(Pageable pageable) {
+    public  ResponseEntity<Page<SolicitacaoDeServico>> buscarSolicitacoesDeServico(Pageable pageable) {
         var page = solicitacaodeServicoRepository.findAll(pageable).map(SolicitacaoDeServico::new);
         return ResponseEntity.ok(page);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity buscarSolicitacoesDeServicoPorId(@PathVariable Long id) {
+        var resultSearchOne = solicitacaodeServicoRepository.findById(id).get();
+        return ResponseEntity.ok(resultSearchOne);
+    }
+
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity atualizaSolicitacao(@RequestBody SolicitacaoDeServico solicitacaoDeServico, @PathVariable Long id) {
+        solicitacaoDeServico.setId(id);
+        solicitacaodeServicoRepository.save(solicitacaoDeServico);
+        return ResponseEntity.ok(solicitacaoDeServico);
+    }
+
+    @DeleteMapping("{id}")
+    @Transactional
+    public ResponseEntity deletarSolicitacao(@PathVariable Long id) {
+        solicitacaodeServicoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
