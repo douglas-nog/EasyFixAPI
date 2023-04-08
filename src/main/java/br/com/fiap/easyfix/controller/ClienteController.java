@@ -40,6 +40,15 @@ public class ClienteController {
         return ResponseEntity.ok(resultSearchOne);
     }
 
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity atualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
+        cliente.setId(id);
+        clienteRepository.save(cliente);
+        return ResponseEntity.ok(cliente);
+
+    }
+
 
     @DeleteMapping("{id}")
     @Transactional
