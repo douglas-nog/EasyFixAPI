@@ -2,6 +2,7 @@ package br.com.fiap.easyfix.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
@@ -31,6 +32,7 @@ public class Cliente {
 
     @NotBlank
     @Column(name = "ds_email")
+    @Email
     private String email;
 
     @NotBlank
