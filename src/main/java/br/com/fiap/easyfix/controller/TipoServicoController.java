@@ -46,5 +46,13 @@ public class TipoServicoController {
         return ResponseEntity.ok(tipoServico);
     }
 
+    @DeleteMapping("{id}")
+    @Transactional
+    public ResponseEntity delete(@PathVariable Long id) {
+        tipoServicoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
 
 }
