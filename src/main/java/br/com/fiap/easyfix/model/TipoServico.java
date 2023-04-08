@@ -2,6 +2,7 @@ package br.com.fiap.easyfix.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -20,8 +21,9 @@ public class TipoServico {
     @Id
     private Long id;
 
+    @NotBlank
     @Column(name = "ds_tipo_servico")
-    private String nomeServico;
+    private String nome;
 
     @OneToMany
     @JoinColumn(name = "id_tipo_servico")
@@ -30,6 +32,6 @@ public class TipoServico {
 
     public TipoServico(TipoServico tipoServico) {
         this.id = tipoServico.id;
-        this.nomeServico = tipoServico.nomeServico;
+        this.nome = tipoServico.nome;
     }
 }
