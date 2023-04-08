@@ -1,8 +1,9 @@
 package br.com.fiap.easyfix.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity(name = "solicitacaoDeServico")
@@ -19,19 +20,21 @@ public class SolicitacaoDeServico {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "solicitacaoDeServico")
     @Column(name = "id_solicitacao")
     private Long id;
+
+    @NotBlank
     @Column(name = "ds_servico")
     private String descricaoServico;
 
 
-    @ManyToOne(optional = true)
+    @ManyToOne
     @JoinColumn(name = "id_tipo_servico", referencedColumnName = "id", nullable = false)
     @Valid
+    @NotNull
     private TipoServico tipoServico;
 
     public SolicitacaoDeServico(SolicitacaoDeServico solicitacaoDeServico) {
         this.id = solicitacaoDeServico.id;
-        this.tipoServico = new TipoServico(solicitacaoDeServico.tipoServico);
+        this.tipoServico = solicitacaoDeServico.tipoServico;
         this.descricaoServico = solicitacaoDeServico.descricaoServico;
     }
-
 }

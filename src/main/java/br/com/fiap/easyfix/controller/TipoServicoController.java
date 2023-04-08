@@ -52,4 +52,7 @@ public class TipoServicoController {
         tipoServicoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+
+
 }
