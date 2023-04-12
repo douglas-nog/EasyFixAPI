@@ -32,9 +32,17 @@ public class SolicitacaoDeServico {
     @NotNull
     private TipoServico tipoServico;
 
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id", nullable = false)
+    @Valid
+    @NotNull
+    private Cliente cliente;
+
+
     public SolicitacaoDeServico(SolicitacaoDeServico solicitacaoDeServico) {
         this.id = solicitacaoDeServico.id;
         this.tipoServico = solicitacaoDeServico.tipoServico;
         this.descricaoServico = solicitacaoDeServico.descricaoServico;
+        this.cliente = solicitacaoDeServico.cliente;
     }
 }
