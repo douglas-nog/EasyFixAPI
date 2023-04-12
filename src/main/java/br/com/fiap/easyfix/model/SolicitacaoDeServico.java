@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity(name = "solicitacaoDeServico")
-@Table(name = "tb_soliCItacao_de_servico")
+@Table(name = "tb_ef_solicitacao_de_servico")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -38,11 +38,18 @@ public class SolicitacaoDeServico {
     @NotNull
     private Cliente cliente;
 
+    @ManyToOne
+    @JoinColumn(name = "id_prestador", referencedColumnName = "id", nullable = false)
+    @Valid
+    @NotNull
+    private PrestadorServico prestadorServico;
+
 
     public SolicitacaoDeServico(SolicitacaoDeServico solicitacaoDeServico) {
         this.id = solicitacaoDeServico.id;
         this.tipoServico = solicitacaoDeServico.tipoServico;
         this.descricaoServico = solicitacaoDeServico.descricaoServico;
         this.cliente = solicitacaoDeServico.cliente;
+        this.prestadorServico = solicitacaoDeServico.prestadorServico;
     }
 }

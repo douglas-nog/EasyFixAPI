@@ -11,7 +11,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "tb_ef_cliente")
 @Getter
 @Setter
 @AllArgsConstructor

@@ -1,10 +1,13 @@
 package br.com.fiap.easyfix.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+
+import java.util.List;
 
 @Entity(name = "prestadorServico")
 @Table(name = "tb_ef_prestador_servico")
@@ -15,7 +18,6 @@ import lombok.*;
 @EqualsAndHashCode(of = "id")
 public class PrestadorServico {
 
-    @Column(name = "id_prestador", nullable = false)
     @Id
     @SequenceGenerator(name = "prestador", sequenceName = "sq_prestador", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "prestador")
@@ -39,6 +41,11 @@ public class PrestadorServico {
     @Column(name = "nr_telefone")
     @Pattern(regexp = "\\d{11}")
     private String telefone;
+
+    @OneToMany
+    @JoinColumn(name = "id_prestador")
+    @JsonIgnore
+    private List<SolicitacaoDeServico> solicitacaoDeServicos;
 
     public PrestadorServico(PrestadorServico prestadorServico) {
         this.id = prestadorServico.getId();

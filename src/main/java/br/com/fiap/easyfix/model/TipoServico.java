@@ -8,7 +8,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity(name = "tipoServico")
-@Table(name = "tb_tipo_servico")
+@Table(name = "tb_ef_tipo_servico")
 @Getter
 @Setter
 @NoArgsConstructor
