@@ -37,4 +37,19 @@ public class PrestadorServicoController {
         var resultSearchOne = prestadorServicoRepository.findById(id).get();
         return ResponseEntity.ok(resultSearchOne);
     }
+
+    @PutMapping("{id}")
+    @Transactional
+    public ResponseEntity atualizarPretador(@RequestBody PrestadorServico prestadorServico, @PathVariable Long id) {
+        prestadorServico.setId(id);
+        prestadorServicoRepository.save(prestadorServico);
+        return ResponseEntity.ok(prestadorServico);
+    }
+
+    @DeleteMapping("{id}")
+    @Transactional
+    public ResponseEntity deletarPrestador(@PathVariable Long id) {
+        prestadorServicoRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
