@@ -49,7 +49,6 @@ public class ClienteController {
 
     }
 
-
     @DeleteMapping("{id}")
     @Transactional
     public ResponseEntity deletarcliente(@PathVariable Long id) {
